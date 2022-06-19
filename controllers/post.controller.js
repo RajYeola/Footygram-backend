@@ -21,13 +21,14 @@ const getAllPosts = async (req, res) => {
 
 const createNewPost = async (req, res) => {
   try {
-    const { postContent } = req.body;
+    const { postContent, imageURL } = req.body;
     const { userID } = req.user;
 
     const newPost = new Post({
       _id: new mongoose.Types.ObjectId(),
       user: userID,
       content: postContent,
+      imageURL: imageURL,
       reactions: {
         laugh: [],
         like: [],
@@ -70,7 +71,7 @@ const addReactionToPost = async (req, res) => {
     const hasUserReacted = reactionToUpdateArray.some(
       (user) => user._id.toString() === userID
     );
-    console.log(hasUserReacted);
+
     if (!hasUserReacted) {
       post.reactions[`${reaction}`].push(user);
       await post.save();

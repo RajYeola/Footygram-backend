@@ -6,6 +6,7 @@ const postSchema = new Schema(
     _id: Schema.Types.ObjectId,
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     content: { type: String, required: true },
+    imageURL: String,
     reactions: {
       laugh: [{ type: Schema.Types.ObjectId, ref: "User" }],
       like: [{ type: Schema.Types.ObjectId, ref: "User" }],
